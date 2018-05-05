@@ -85,7 +85,8 @@ public class GlobeSortServer {
         }
 
         @Override
-        public void sortIntegers(IntArray req, final StreamObserver<IntArray> responseObserver) {
+        long void sortIntegers(IntArray req, final StreamObserver<IntArray> responseObserver) {
+            long sortStart = System.nanoTime();
             Integer[] values = req.getValuesList().toArray(new Integer[req.getValuesList().size()]);
             Arrays.sort(values);
             IntArray.Builder responseBuilder = IntArray.newBuilder();
@@ -93,8 +94,10 @@ public class GlobeSortServer {
                 responseBuilder.addValues(val);
             }
             IntArray response = responseBuilder.build();
+	    long sortEnd = system.nanoTime();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
+	    return (sortEnd - sortStart);	
         }
     }
 }

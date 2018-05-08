@@ -52,8 +52,8 @@ public class GlobeSortClient {
 	long startTimeSort = System.nanoTime();
         IntArray responseSort = serverStub.sortIntegers(request);
 	long endTimeSort = System.nanoTime();
-	float durationSort = (float)((endTimeSort - startTimeSort)/1000000000 );
-	float sortTime = (float)responseSort.getTimeTaken()/100000000;
+	float durationSort = (float)((float)(endTimeSort - startTimeSort)/1000000000.0);
+	float sortTime = (float)responseSort.getTimeTaken()/1000000000;
         System.out.println("Sorted array");
 	System.out.println("The duration of the sort call was: " + durationSort + " seconds");
 	System.out.println("The duration of the sort on the server was: " + sortTime + " seconds");

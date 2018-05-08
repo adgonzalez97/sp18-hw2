@@ -43,19 +43,20 @@ public class GlobeSortClient {
 	long startTimePing = System.nanoTime();
         serverStub.ping(Empty.newBuilder().build());
 	long endTimePing = System.nanoTime();
-	long durationPing = (endTimePing - startTimePing);
+	float durationPing = (float)(endTimePing - startTimePing)/1000000000;
         System.out.println("Ping successful.");
-	System.out.println("The duration of the ping was: " + durationPing);
+	System.out.println("The duration of the ping was: " + durationPing + " seconds");
 
         System.out.println("Requesting server to sort array");
         IntArray request = IntArray.newBuilder().addAllValues(Arrays.asList(values)).build();
 	long startTimeSort = System.nanoTime();
         IntArray responseSort = serverStub.sortIntegers(request);
 	long endTimeSort = System.nanoTime();
-	long durationSort = (endTimeSort - startTimeSort);
+	float durationSort = (float)((endTimeSort - startTimeSort)/1000000000 );
+	float sortTime = (float)responseSort.getTimeTaken()/100000000;
         System.out.println("Sorted array");
-	System.out.println("The duration of the sort call was: " + durationSort);
-	System.out.println("The duration of the sort on the server was: " + responseSort.getTimeTaken());
+	System.out.println("The duration of the sort call was: " + durationSort + " seconds");
+	System.out.println("The duration of the sort on the server was: " + sortTime + " seconds");
     }
 
     public void shutdown() throws InterruptedException {
